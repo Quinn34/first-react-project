@@ -6,7 +6,7 @@
 }
 a {
   font-weight: 500;
-  color: white;
+  color: black;
   text-decoration: inherit;
 }
 a:hover {
@@ -16,14 +16,14 @@ a:hover {
 .header{
   display: flex;
   flex-direction: row;
-  height: 100px;
+  height: 130px;
   width: 100%;
-  background-color: red;
-}
+  background-color: black;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;}
 .first-box{
   height: 100%;
   width: 25%;
-  background-color: blue;
+  background-color: white;
 }
 .logo{
   justify-content: space-around;
@@ -34,13 +34,13 @@ a:hover {
   width: 80%;
 }
 .fff{
-  height: 100px;
+  height: 130px;
   width: 250px;
 }
 .second-box{
   height: 100%;
   width: 50%;
-  background-color: brown;
+  background-color: white;
 }
 .content{
   display: flex;
@@ -48,21 +48,21 @@ a:hover {
   font-size: 30px;
   color: white;
   justify-content: space-around;
-  margin-top: 35px;
+  margin-top: 50px;
 }
 
 .third-box{
   height: 100%;
   width: 25%;
-  background-color: grey;
+  background-color: white;
 }
 .logout{
   justify-content: space-around;
   display: flex;
   flex-direction: row;
-  color: white;
+  color: black;
   font-size: 30px;
-  margin-top: 35px;
+  margin-top: 50px;
 }
 .all-mid{
   background-color: black;
@@ -77,25 +77,27 @@ a:hover {
 .foot{
   width: 100%;
   height: 200px;
-  background-color: red;
+  background-color: white;
   display: flex;
   flex-direction: row;
-}
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
 .box1{
   height: 100%;
   width: 33%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  color: white;
+  color: black;
   font-size: 30px;
   text-align: center;
 
 }
 .container {
+  margin-top: 50px ;
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .error {
@@ -156,4 +158,85 @@ a:hover {
 }
 .coin-card:last-child:nth-child(3n + 1) {
   grid-column: 2 / 3;
+}
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.coins-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolommen */
+  gap: 20px; /* Ruimte tussen de kaarten */
+  justify-content: center;
+  padding: 20px;
+  height: 900px;
+}
+
+.coin-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.coin-card:hover {
+  transform: scale(1.05);
+}.coins-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolommen */
+  gap: 20px; /* Ruimte tussen de kaarten */
+  justify-content: center;
+  padding: 20px;
+}
+
+.coin-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.coin-card:hover {
+  transform: scale(1.05);
+}
+
+.coin-image {
+  width: 50px;
+  height: 50px;
+}
+
+.coin-details {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-button {
+  margin: 15px 0;
+  padding: 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.refresh-button:hover {
+  background: #0056b3;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
 }

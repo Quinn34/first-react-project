@@ -5,20 +5,20 @@ function Footer(){
         <footer>
             <div className="foot">
                 <div className="box1">
-                    <p>Quinn</p>                    
-                    <p>van</p>
-                    <p>Huizen</p>
+                    <p>Quinn van Huizen</p>                    
+                    <p>TIA4V2A</p>
+                    <p>1207398</p>
 
                 </div>
                 <div className="box1">
-                    <p>Snackbar</p>
-                    <p>friettent</p>
-                    <p>maccie</p>
+                    <p>Meest verkocht</p>
+                    <p>Shop</p>
+                    <p>Info</p>
                 </div>
                 <div className="box1">
-                    <p>software dev</p>
+                    <p>Software dev</p>
                     <p>Technovium</p>
-                    <p>hmm lekker</p>
+                    <p>ROC-Nijmegen</p>
 
                 </div>
             </div>
