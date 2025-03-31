@@ -2,13 +2,28 @@ import { useEffect, useState, useRef } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import "./index.css";
 
-const Api = () => {
-  const [coins, setCoins] = useState([]);
-  const [selectedCoin, setSelectedCoin] = useState(null);
-  const [chartData, setChartData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const detailsRef = useRef(null);
+type Coin = {
+  id: string;
+  name: string;
+  symbol: string;
+  image: string;
+  current_price: number;
+  market_cap: number;
+};
+
+type ChartData = {
+  date: string;
+  price: number;
+};
+
+const Api: React.FC = () => {
+  
+  const [coins, setCoins] = useState<Coin[]>([]);
+  const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const detailsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchCoins = async () => {
@@ -19,9 +34,9 @@ const Api = () => {
 
         if (!response.ok) throw new Error(`HTTP-fout! Status: ${response.status}`);
 
-        const data = await response.json();
+        const data: Coin[] = await response.json();
         setCoins(data);
-      } catch (err) {
+      } catch (err: any) {
         setError(err.message || "Onbekende fout");
       } finally {
         setLoading(false);
@@ -31,18 +46,18 @@ const Api = () => {
     fetchCoins();
   }, []);
 
-  const fetchChartData = async (coinId) => {
+  const fetchChartData = async (coinId: string) => {
     try {
       const response = await fetch(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`
+
       );
 
       if (!response.ok) throw new Error(`HTTP-fout! Status: ${response.status}`);
 
       const data = await response.json();
-
-      // Formatteer data voor de grafiek
-      const formattedData = data.prices.map((price) => ({
+      
+      const formattedData: ChartData[] = data.prices.map((price: [number, number]) => ({
         date: new Date(price[0]).toLocaleDateString(),
         price: price[1],
       }));
@@ -53,7 +68,7 @@ const Api = () => {
     }
   };
 
-  const handleClick = (coin) => {
+  const handleClick = (coin: Coin) => {
     setSelectedCoin(coin);
     fetchChartData(coin.id);
 
@@ -69,16 +84,14 @@ const Api = () => {
     <div className="container">
       <h2>Cryptocurrency Lijst</h2>
       <div className="coins-container">
-      {coins.map((coin) => (
-      <div key={coin.id} className="coin-card" onClick={() => handleClick(coin)}>
-      <img src={coin.image} alt={coin.name} className="coin-image" />
-      <h3>{coin.name} ({coin.symbol.toUpperCase()})</h3>
-      <p>Prijs: ${coin.current_price.toLocaleString()}</p>
-    </div>
-      ))}
-    </div>
-
-
+        {coins.map((coin) => (
+          <div key={coin.id} className="coin-card" onClick={() => handleClick(coin)}>
+            <img src={coin.image} alt={coin.name} className="coin-image" />
+            <h3>{coin.name} ({coin.symbol.toUpperCase()})</h3>
+            <p>Prijs: ${coin.current_price.toLocaleString()}</p>
+          </div>
+        ))}
+      </div>
 
       {selectedCoin && (
         <div className="coin-details" ref={detailsRef}>
@@ -91,7 +104,6 @@ const Api = () => {
             Ververs grafiek 🔄
           </button>
 
-          {/* Grafiek weergeven */}
           <div className="chart-container">
             <h3>Prijsverloop (7 dagen)</h3>
             <ResponsiveContainer width="100%" height={300}>
