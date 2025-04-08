@@ -24,6 +24,7 @@ function Footer(){
                 </div>
             </div>
         </footer>
+        // de hele footer
     )
 
 }

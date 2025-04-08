@@ -7,7 +7,7 @@ interface Coin {
   name: string;
   market_cap: number;
 }
-
+// benodigde variabelen
 const MarketShareChart: React.FC = () => {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,8 +17,9 @@ const MarketShareChart: React.FC = () => {
     const fetchCoins = async () => {
       try {
         const response = await fetch(
-          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=12&page=1&sparkline=false'
         );
+        // haalt een cicrle diagram op van de top 12 munten.
         if (!response.ok) throw new Error(`HTTP-fout! Status: ${response.status}`);
         const data: Coin[] = await response.json();
         setCoins(data);
@@ -26,6 +27,7 @@ const MarketShareChart: React.FC = () => {
         setError(err.message || 'Onbekende fout');
       } finally {
         setLoading(false);
+        // geeeft een error als het fout is
       }
     };
 
@@ -41,7 +43,7 @@ const MarketShareChart: React.FC = () => {
     value: coin.market_cap,
   }));
 
-  // Define colors for the pie slices
+  // Kleuren van de coins in de diagram
   const COLORS = ['#ff8c00', '#ffbb33', '#ffcc00', '#66ccff', '#00cc99', '#ff6666', '#9966cc', '#33cc33', '#ff3399', '#66cc66'];
 
   return (
@@ -66,6 +68,7 @@ const MarketShareChart: React.FC = () => {
         </PieChart>
       </ResponsiveContainer>
     </div>
+    // display van de diagram^
   );
 };
 

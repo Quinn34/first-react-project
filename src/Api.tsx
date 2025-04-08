@@ -19,23 +19,29 @@ type ChartData = {
 };
 
 const Api: React.FC = () => {
-  
-  const [coins, setCoins] = useState<Coin[]>([]);
-  const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const detailsRef = useRef<HTMLDivElement | null>(null);
+    //Lijst van opgehaalde munten.
+    const [coins, setCoins] = useState<Coin[]>([]);
+    //Geselecteerde munt door gebruiker.
+    const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
+    //Gegevens voor de prijsgrafiek van de geselecteerde munt.
+    const [chartData, setChartData] = useState<ChartData[]>([]);
+    //Houdt bij of de gegevens nog aan het laden zijn.
+    const [loading, setLoading] = useState<boolean>(true);
+    //Slaat een foutmelding op als het ophalen van gegevens mislukt.
+    const [error, setError] = useState<string | null>(null);
+    //Verwijzing naar de muntdetails, om naar toe te scrollen bij selectie.
+    const detailsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchCoins = async () => {
       try {
         const response = await fetch(
-          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=12&page=1&sparkline=false"
         );
+        // ^Haalt 12 coins uit de api
 
         if (!response.ok) throw new Error(`HTTP-fout! Status: ${response.status}`);
-
+        // Geeft error als niet werkt
         const data: Coin[] = await response.json();
         setCoins(data);
       } catch (err: any) {
@@ -52,7 +58,7 @@ const Api: React.FC = () => {
     try {
       const response = await fetch(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`
-
+        // haalt een grafiek op met de veranderingen over de laaste 7 dagen.
       );
 
       if (!response.ok) throw new Error(`HTTP-fout! Status: ${response.status}`);
@@ -68,6 +74,7 @@ const Api: React.FC = () => {
     } catch (err) {
       console.error("Fout bij ophalen van grafiekgegevens:", err);
     }
+    // Error als de grafiek niet laadt
   };
 
   const handleClick = (coin: Coin) => {
@@ -77,6 +84,7 @@ const Api: React.FC = () => {
     setTimeout(() => {
       detailsRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
+    // deze code scrolt naar beneden als je op een coin klikt.
   };
 
   if (loading) return <p>Gegevens laden...</p>;
@@ -94,6 +102,7 @@ const Api: React.FC = () => {
           </div>
         ))}
       </div>
+      {/* de display van de coins^ */}
 
       {selectedCoin && (
         <div className="coin-details" ref={detailsRef}>
@@ -105,7 +114,7 @@ const Api: React.FC = () => {
           <button className="refresh-button" onClick={() => fetchChartData(selectedCoin.id)}>
             Ververs grafiek 🔄
           </button>
-
+          {/*^de refresh knop voor de grafiek en de rest van de coin details*/}
           <div className="chart-container">
             <h3>Prijsverloop (7 dagen)</h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -116,6 +125,7 @@ const Api: React.FC = () => {
                 <Line type="monotone" dataKey="price" stroke="#8884d8" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
+            {/* de grafiek display*/}
           </div>
         </div>
       )}
