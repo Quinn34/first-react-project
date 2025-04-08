@@ -1,4 +1,5 @@
 import "./index.css"
+// ^benodigde imports
 
 function Footer(){
     return(

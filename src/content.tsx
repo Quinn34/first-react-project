@@ -1,6 +1,7 @@
 import "./index.css"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Favoriet from './Favoriet';
+// ^benodigde imports
 
 function Content(){
     return(
@@ -13,7 +14,7 @@ function Content(){
           
           <Routes>
             <Route path="/Favoriet" element={<Favoriet />} />
-            {/* Voeg andere routes toe zoals nodig */}
+            {/* Route voor Favoriet */}
           </Routes>
         </div>
       </BrowserRouter>

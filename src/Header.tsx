@@ -3,6 +3,7 @@ import Favoriet from './Favoriet.tsx';
 import Kopen from './Kopen.tsx';
 import About from './About.tsx';
 import "./index.css"
+// ^benodigde imports
 
 function Header(){
     return(
@@ -12,6 +13,7 @@ function Header(){
                 <img src="./assets/logo.png" className="fff" title="#"/>
             </div>
         </div>          
+        {/* Coinking logo^ */}
         <BrowserRouter>
       <div className="second-box">
         <div className="content">
@@ -21,20 +23,22 @@ function Header(){
           <Link to="/Overons" className="overons-link">Over ons</Link>
         </div>
       </div>
-
+      {/* links naar andere pagina */}
       <Routes>
         <Route path="/Kopen" element={<Kopen />} />
         <Route path="/Favoriet" element={<Favoriet />} />
         <Route path="/Overons" element={<About />} />
       </Routes>
     </BrowserRouter>
+    {/* de routes naar andere paginas */}
         <div className="third-box">
             <div className="logout">
                 <p>Log In</p>
             </div>
         </div>
-    </div>
-    )
+    </div> 
+    // Login-box
+    ) 
 }
 
 

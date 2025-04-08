@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import "./index.css";
+// ^benodigde imports
 
 type Coin = {
   id: string;
@@ -10,6 +11,7 @@ type Coin = {
   current_price: number;
   market_cap: number;
 };
+// ^variabele maken
 
 type ChartData = {
   date: string;
