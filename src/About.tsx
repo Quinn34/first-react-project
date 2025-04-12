@@ -6,6 +6,7 @@ function About(){
         <></>
     )
 }
+    // link naar About page
 
 
 export default About

@@ -5,6 +5,7 @@ function Home(){
     return(
         <></>
     )
+    // link naar hoofdpage
 }
 
 
